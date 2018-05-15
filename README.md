@@ -1,0 +1,2 @@
+# starter
+diCMS project starter
