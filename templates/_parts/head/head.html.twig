@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="{{ _lang['name'] }}"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:og="http://ogp.me/ns#"
+      xmlns:fb="https://www.facebook.com/2008/fbml">
+
+<head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# website: http://ogp.me/ns/website#">
+{% if needed['html_base'] %}
+	<base href="{{ _tech['html_base'] }}">
+{% endif %}
+	<title>{{ meta['title'] }}</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="description" content="{{ meta['description'] }}">
+{% if meta['keywords'] %}
+	<meta name="keywords" content="{{ meta['keywords'] }}">
+{% endif %}
+	{% if needed['noindex'] %}<meta name="robots" content="noindex, nofollow">{% endif %}
+
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+	<link rel="canonical" href="{{ canonical['full_url'] }}">
+
+	{% include '_parts/head/favicon.html.twig' %}
+	{% include '_parts/head/open_graph.html.twig' %}
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+	<link href="/assets/styles/styles.min.css?{{ files_timestamp }}" rel="stylesheet" type="text/css">
+</head>

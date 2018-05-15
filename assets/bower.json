@@ -1,0 +1,21 @@
+{
+  "name": "[%DOMAIN%]",
+  "description": "",
+  "main": "",
+  "authors": [
+    "dimaninc"
+  ],
+  "license": "UNLICENSED",
+  "homepage": "[%DOMAIN%]",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "dreampilot": "git@github.com:testpilotco/dreampilot.git#2dc3cc6563e4764f4d657b097adee43da165285a"
+  }
+}

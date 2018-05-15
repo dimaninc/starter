@@ -1,0 +1,19 @@
+{% include '_parts/head/head.html.twig' %}
+
+<body data-page-type="{{ content_page['type'] }}">
+
+{% include 'header.html.twig' %}
+
+<section>
+	{{ _page|raw }}
+</section>
+
+{% include 'footer.html.twig' %}
+
+{% include '_parts/head/static.html.twig' %}
+
+{% if needed['counters'] %}{% include '_parts/counters.html.twig' %}{% endif %}
+
+</body>
+
+</html>

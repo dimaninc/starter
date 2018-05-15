@@ -1,0 +1,7 @@
+{% if _tech['env'] in ['dev', 'stage'] %}
+	{% set suffix = '' %}
+{% else %}
+	{% set suffix = '.min' %}
+{% endif %}
+<script src="/assets/vendor/jquery/dist/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="/assets/js/application{{ suffix }}.js?{{ files_timestamp }}" type="text/javascript" charset="utf-8"></script>

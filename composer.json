@@ -1,0 +1,15 @@
+{
+    "name": "[%DOMAIN%]",
+    "type": "project",
+    "require": {
+        "dimaninc/di_core": "dev-master",
+        "phpmailer/phpmailer": "^6.0"
+    },
+    "authors": [
+        {
+            "name": "PilotLabs",
+            "email": "petrov@testpilot.co"
+        }
+    ],
+    "minimum-stability": "stable"
+}

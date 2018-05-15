@@ -1,0 +1,6 @@
+<ul>
+	{% for m in menu %}
+		{% set selected = m['id'] == content_page['id'] %}
+		<li><a href="{{ m['href'] }}"{% if selected %} class="selected"{% endif %}><u{% if show_icons %} style="background-image: url({{ m['ico_with_path'] }});"{% endif %}>{{ m['caption'] ?: m['title'] }}</u></a></li>
+	{% endfor %}
+</ul>

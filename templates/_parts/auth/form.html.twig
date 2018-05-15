@@ -1,0 +1,24 @@
+<div class="title">Авторизация</div>
+
+<form action="/api/auth/login/" method="post" name="login_form">
+    <input type="hidden" name="back" value="{{ _tech['url'] }}">
+
+    <div class="error">Авторизация не удалась</div>
+
+    <label for="login">E-mail</label>
+    <input type="email" id="login" name="vm_login" required="required">
+
+    <label for="password">Пароль</label>
+    <input type="password" id="password" name="vm_password" required="required">
+
+    <div class="remember_password">
+        <input type="checkbox" id="remember_password" name="vm_remember">
+        <label for="remember_password">запомнить пароль</label>
+    </div>
+
+    <a class="forgot" href="/{{ content_slugs['reset_password'] }}/">Забыли пароль?</a>
+
+    <button type="submit">Войти</button>
+</form>
+
+<div class="but"><a href="/{{ content_slugs['registration'] }}/"><i>Зарегистрироваться</i></a></div>

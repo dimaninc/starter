@@ -1,0 +1,46 @@
+DirectoryIndex index.php
+
+Options ExecCGI FollowSymLinks Includes
+Options +FollowSymLinks
+
+<IfModule mod_headers.c>
+Header set X-UA-Compatible "IE=edge"
+</IfModule>
+
+#php_flag session.use_only_cookies On
+#php_flag session.use_trans_sid Off
+#php_flag register_globals Off
+#php_flag magic_quotes_gpc Off
+#php_value max_execution_time 240
+#php_value post_max_size 100M
+#php_value upload_max_filesize 100M
+
+AddDefaultCharset utf8
+AddCharset utf8 .xml
+AddType text/xml .xml
+AddType application/x-compressed .rar
+AddType application/x-compressed .zip
+AddType application/pdf .pdf
+Addtype application/x-shockwave-flash .swf
+Addtype audio/mpeg .mp3
+
+ErrorDocument 404 /index.php?404
+
+RewriteEngine On
+
+#RewriteCond %{HTTP_HOST} !^domain\.com$ [NC]
+#RewriteCond %{REQUEST_URI} !^/robots\.txt$
+#RewriteRule ^(.*)$ http://domain.com/$1 [R=301,L]
+
+#RewriteCond %{HTTPS} !^on$
+#RewriteRule (.*) https://domain.com/$1 [R=301,L]
+
+RewriteRule ^_core/php/admin/workers/(.*)$ api.php [QSA,L]
+RewriteRule ^_core/php/workers/(.*)$ api.php [QSA,L]
+RewriteRule ^api/(.*)$ api.php [QSA,L]
+RewriteRule ^_core/i/(.*)$ assets/images/_core/$1 [QSA,L]
+
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_URI} !^.*(jpg|jpeg|gif|png)$ [NC]
+RewriteRule ^(.+)$ index.php [QSA,L]
