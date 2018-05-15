@@ -23,10 +23,10 @@ class CMS extends \diCore\Base\CMS
 	];
 
 	static public $possibleLanguages = [
-		'en',
+		'ru',
 	];
 
-	public static $defaultLanguage = 'en';
+	public static $defaultLanguage = 'ru';
 
 	protected static $customSkipGetParams = [
 	];

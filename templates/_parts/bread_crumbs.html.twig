@@ -1,0 +1,10 @@
+<div class="bread-crumbs">
+    {% for bc in bread_crumbs %}
+        {% if bc['href'] %}
+            <a href="{{ bc['href'] }}"{% if bc['class'] %} class="{{ bc['class'] }}"{% endif %}>{{ bc['title'] }}</a>
+        {% else %}
+            {{ bc['title'] }}
+        {% endif %}
+        {% if not loop.last %} / {% endif %}{# divider #}
+    {% endfor %}
+</div>
