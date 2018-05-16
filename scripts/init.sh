@@ -25,7 +25,7 @@ else
 	exit
 fi
 
-if [[ "$folder"="_starter" ]]; then
+if [[ "$folder" = "_starter" ]]; then
 	printf "${COLOR_RED}Error:${COLOR_NO} Unable to run script on source repo\n"
 	exit
 fi
