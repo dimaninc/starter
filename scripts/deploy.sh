@@ -24,14 +24,12 @@ then
     git stash
     git pull
 
-    cd $project_root
     composer selfupdate
     composer install
 
-    cd $project_root"/vendor/dimaninc/di_core/scripts"
-    sh copy_core_static.sh
+    sh vendor/dimaninc/di_core/scripts/copy_core_static.sh
 
-    cd $project_root"/assets"
+    cd assets
     npm install
     gulp build
 
