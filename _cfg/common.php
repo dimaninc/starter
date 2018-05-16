@@ -18,7 +18,7 @@ switch (\diCore\Base\CMS::getEnvironment())
 			'host' => 'localhost',
 			'login' => 'root',
 			'password' => '',
-			'database' => 'dev_dbname',
+			'database' => '[%FOLDER%]',
 		]);
 		break;
 
