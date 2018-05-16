@@ -2,7 +2,7 @@
 gulp = require 'gulp'
 spriteSmith = require 'gulp.spritesmith' # sprite generator
 stylus = require 'gulp-stylus'
-less = require 'gulp-less'
+#less = require 'gulp-less'
 csso = require 'gulp-csso' # css minify
 #imagemin = require 'gulp-imagemin'
 uglify = require 'gulp-uglify' # js minify
@@ -53,8 +53,8 @@ cssOutput = stylusBuildFolder + 'styles.css'
 cssFiles = [
     cssFolder + 'jquery/*.css'
     #diCoreFolder + 'css/dipopups.css'
-    #stylusBuildFolder + 'main.css'
-    lessBuildFolder + 'less.css'
+    stylusBuildFolder + 'main.css'
+    #lessBuildFolder + 'less.css'
 ]
 
 # coffee settings
@@ -80,7 +80,6 @@ jsFiles = reactCoreFiles.map (f) -> reactCoreFolder + f
     #diCoreFolder + 'js/functions.js'
     bowerFolder + 'jsep/src/jsep.js'
     bowerFolder + 'dreampilot/dist/dp.js' #.min
-    bowerFolder + 'slick-carousel/slick/slick.min.js'
     jsFolder + '**/**/*.js' # pure js
     jsBuildFolder + '**/*.js' # compiled coffee
     '!' + jsBuildFolder + jsOutput
@@ -109,12 +108,12 @@ assetsTargetFolder = '../htdocs/assets/'
 
 # watch settings
 watchSettings =
-    #'stylus-sprite':
-    #    mask: spritesMask
-    #'stylus':
-    #    mask: stylusFolder + stylusMask
-    'less':
-        mask: lessFolder + lessMask
+    'stylus-sprite':
+        mask: spritesMask
+    'stylus':
+        mask: stylusFolder + stylusMask
+    #'less':
+    #    mask: lessFolder + lessMask
     'css-concat':
         mask: cssFiles
     'css-min':
@@ -202,18 +201,18 @@ gulp.task 'copy-assets', (done) ->
 
 Helper
 .assignBasicTasksToGulp gulp
-.assignLessTaskToGulp gulp, fn: lessFn, buildFolder: lessBuildFolder
-#.assignPngSpritesTaskToGulp gulp, mask: spritesMask, imgName: spritesImageName, cssName: spritesFileName, cssFormat: 'stylus', imgFolder: spritesImageOutputFolder, cssFolder: spritesCssOutputFolder
-#.assignStylusTaskToGulp gulp, fn: stylusFn, buildFolder: stylusBuildFolder
+#.assignLessTaskToGulp gulp, fn: lessFn, buildFolder: lessBuildFolder
+.assignPngSpritesTaskToGulp gulp, mask: spritesMask, imgName: spritesImageName, cssName: spritesFileName, cssFormat: 'stylus', imgFolder: spritesImageOutputFolder, cssFolder: spritesCssOutputFolder
+.assignStylusTaskToGulp gulp, fn: stylusFn, buildFolder: stylusBuildFolder
 .assignCssConcatTaskToGulp gulp, files: cssFiles, output: cssOutput
 .assignCoffeeTaskToGulp gulp, folder: coffeeFolder, mask: coffeeMask, jsBuildFolder: jsBuildFolder, cleanBefore: false
 
 # build
 gulp.task 'build', gulp.series(
     'bower-files'
-    #'stylus-sprite'
-    #'stylus'
-    'less'
+    'stylus-sprite'
+    'stylus'
+    #'less'
     'css-concat'
     'css-min'
     'coffee'

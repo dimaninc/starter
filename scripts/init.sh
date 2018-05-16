@@ -3,6 +3,9 @@
 outer_path=$(pwd)
 path="$outer_path/$0"
 defaultUser='dimaninc'
+COLOR_RED='\033[0;31m'
+COLOR_GREEN='\033[0;32m'
+COLOR_NO='\033[0m'
 
 if [[ "$OSTYPE" == "darwin"* ]]; then
 	isMacOs=true
@@ -44,9 +47,17 @@ creatorToken='\[%CREATOR%\]'
 dateToken='\[%DATE%\]'
 timeToken='\[%TIME%\]'
 
+environmentFullPathOrig="$root/src/$namespaceToken/Data/Environment.php"
+environmentFullPath="$root/src/$namespace/Data/Environment.php"
+
+if [[ -f $environmentFullPathOrig || -f $environmentFullPath ]]; then
+	printf "${COLOR_RED}Error:${COLOR_NO} 'Environment.php' found: init script has been already executed before\n"
+	exit
+fi
+
 # generate Environment class
-echo "Generating Environment.php"
-cat > "$root/src/$namespaceToken/Data/Environment.php" << EOF
+echo "Generating Environment.php..."
+cat > "$environmentFullPathOrig" << EOF
 <?php
 namespace $namespaceToken\Data;
 
@@ -57,27 +68,48 @@ class Environment extends \diCore\Data\Environment
 EOF
 
 cd "$root"
+start_folder=$OLDPWD
+
+# kill .git folder
+echo "Killing starter's git repo..."
+rm -rf .git
+git init
 
 # replace macros
 echo 'Setting up Variables...'
-find . -type f ! -name 'init.sh' | xargs sed -i"$sedParam" -e "s/$folderToken/$folder/g" -e "s/$domainToken/$domain/g" -e "s/$namespaceToken/$namespace/g" -e "s/$userToken/$user/g" -e "s/$creatorToken/$creator/g" -e "s/$dateToken/$date/g" -e "s/$timeToken/$time/g"
+find . -type f ! -name 'init.sh' | xargs sed -i"$sedParam"\
+	-e "s/$folderToken/$folder/g"\
+	-e "s/$domainToken/$domain/g"\
+	-e "s/$namespaceToken/$namespace/g"\
+	-e "s/$userToken/$user/g"\
+	-e "s/$creatorToken/$creator/g"\
+	-e "s/$dateToken/$date/g"\
+	-e "s/$timeToken/$time/g"
 
 # rename Namespace folder
-echo "Renaming folder $root/src/$namespaceToken to $root/src/$namespace"
+echo "Renaming folder $root/src/$namespaceToken to $root/src/$namespace..."
 mv "$root/src/$namespaceToken" "$root/src/$namespace"
 
 # composer install
-
-# npm install
+echo "Installing composer dependencies..."
+composer install
 
 # core init
+echo "Creating work folders..."
+sh vendor/dimaninc/di_core/scripts/create_work_folders.sh
+echo "Copying core assets..."
+sh vendor/dimaninc/di_core/scripts/copy_core_static.sh
+
+# npm install
+echo "Installing NPM dependencies..."
+cd assets
+npm install
 
 # gulp build
-
-# kill .git folder
-rm -rf .git
-
-cd - >/dev/null 2>&1
+gulp build
 
 # self-destruction
+cd "$start_folder"
 rm $0
+
+printf "${COLOR_GREEN}Project ${folder} has been set up successfully${COLOR_NO}\n"
