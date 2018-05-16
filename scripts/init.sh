@@ -25,6 +25,11 @@ else
 	exit
 fi
 
+if [[ "$folder"="_starter" ]]; then
+	printf "${COLOR_RED}Error:${COLOR_NO} Unable to run script on source repo\n"
+	exit
+fi
+
 while [ -z ${domain} ]; do
      read -p 'Main domain: ' domain
 done
