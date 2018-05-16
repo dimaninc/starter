@@ -35,7 +35,7 @@ creator='diCMS Starter'
 date=$(date +"%d.%m.%Y")
 time=$(date +"%H:%M:%S")
 
-# replace macros
+# macros tokens
 folderToken='\[%FOLDER%\]'
 domainToken='\[%DOMAIN%\]'
 namespaceToken='NewProject'
@@ -44,27 +44,27 @@ creatorToken='\[%CREATOR%\]'
 dateToken='\[%DATE%\]'
 timeToken='\[%TIME%\]'
 
+# generate Environment class
+echo "Generating Environment.php"
+cat > "$root/src/$namespaceToken/Data/Environment.php" << EOF
+<?php
+namespace $namespaceToken\Data;
+
+class Environment extends \diCore\Data\Environment
+{
+    const mainDomain = '[%DOMAIN%]';
+}
+EOF
+
 cd "$root"
-echo 'Setting Variables...'
+
+# replace macros
+echo 'Setting up Variables...'
 find . -type f ! -name 'init.sh' | xargs sed -i"$sedParam" -e "s/$folderToken/$folder/g" -e "s/$domainToken/$domain/g" -e "s/$namespaceToken/$namespace/g" -e "s/$userToken/$user/g" -e "s/$creatorToken/$creator/g" -e "s/$dateToken/$date/g" -e "s/$timeToken/$time/g"
 
-#echo 'Setting Folder...'
-#find . -type f ! -name 'init.sh' | xargs sed -i"$sedParam" "s/$folderToken/$folder/g"
-#echo 'Setting Domain...'
-#find . -type f ! -name 'init.sh' | xargs sed -i"$sedParam" "s/$domainToken/$domain/g"
-#echo 'Setting Namespace...'
-#find . -type f ! -name 'init.sh' | xargs sed -i"$sedParam" "s/$namespaceToken/$namespace/g"
-#echo 'Setting User...'
-#find . -type f ! -name 'init.sh' | xargs sed -i"$sedParam" "s/$userToken/$user/g"
-#echo 'Setting Creator...'
-#find . -type f ! -name 'init.sh' | xargs sed -i"$sedParam" "s/$creatorToken/$creator/g"
-#echo 'Setting Date...'
-#find . -type f ! -name 'init.sh' | xargs sed -i"$sedParam" "s/$dateToken/$date/g"
-#echo 'Setting Time...'
-#find . -type f ! -name 'init.sh' | xargs sed -i"$sedParam" "s/$timeToken/$time/g"
-cd - >/dev/null 2>&1
-
-# generate Environment class
+# rename Namespace folder
+echo "Renaming folder $root/src/$namespaceToken to $root/src/$namespace"
+mv "$root/src/$namespaceToken" "$root/src/$namespace"
 
 # composer install
 
@@ -75,6 +75,9 @@ cd - >/dev/null 2>&1
 # gulp build
 
 # kill .git folder
+rm -rf .git
+
+cd - >/dev/null 2>&1
 
 # self-destruction
-#rm $0
+rm $0
