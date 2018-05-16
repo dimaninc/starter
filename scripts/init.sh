@@ -75,6 +75,13 @@ EOF
 cd "$root"
 start_folder=$OLDPWD
 
+# generate readme
+echo "Generating README.md..."
+cat > "README.md" << EOF
+# NewProject
+[%DOMAIN%]
+EOF
+
 # kill .git folder
 echo "Killing starter's git repo..."
 rm -rf .git
