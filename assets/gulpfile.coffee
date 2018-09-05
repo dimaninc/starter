@@ -1,37 +1,19 @@
-# initiating plugins
 gulp = require 'gulp'
-spriteSmith = require 'gulp.spritesmith' # sprite generator
-stylus = require 'gulp-stylus'
-#less = require 'gulp-less'
-csso = require 'gulp-csso' # css minify
-#imagemin = require 'gulp-imagemin'
-uglify = require 'gulp-uglify' # js minify
-concat = require 'gulp-concat'
-bower = require 'gulp-bower'
-rename = require 'gulp-rename'
-#babel = require 'gulp-babel'
-#newer = require 'gulp-newer'
-#sourcemaps = require 'gulp-sourcemaps'
-#eslint = require 'gulp-eslint'
-nib = require 'nib'
 Helper = require('../vendor/dimaninc/di_core/scripts/static-builder/inc/gulp.helper').setWorkFolder __dirname
 
 # base folder
 buildFolder = 'build/'
 jsBuildFolder = buildFolder + 'js/'
-diCoreFolder = '../vendor/dimaninc/di_core/' # _core/
 vendorFolder = '../htdocs/assets/vendor/'
 bowerFolder = 'bower_components/'
 
 # stylus settings
 stylusFolder = 'stylus/'
-stylusMask = '**/*.styl'
 stylusBuildFolder = buildFolder + 'styles/'
 stylusFn = stylusFolder + 'main.styl'
 
 # less settings
 lessFolder = 'less/'
-lessMask = '**/*.less'
 lessBuildFolder = buildFolder + 'styles/'
 lessFn = lessFolder + 'less.less'
 
@@ -42,7 +24,6 @@ videosFolder = 'videos/'
 
 # sprites settings
 spritesImageOutputFolder = 'images/'
-spritesMask = 'images/sprite-src/**/*.png'
 spritesImageName = 'sprite.png'
 spritesCssOutputFolder = stylusFolder + 'inc/'
 spritesFileName = 'sprite.styl'
@@ -50,20 +31,19 @@ spritesFileName = 'sprite.styl'
 # css settings
 cssFolder = 'css/'
 cssOutput = stylusBuildFolder + 'styles.css'
+cssOutputMin = stylusBuildFolder + 'styles.min.css'
 cssFiles = [
     cssFolder + 'jquery/*.css'
-    #diCoreFolder + 'css/dipopups.css'
+    #Helper.getCoreFolder() + 'css/dipopups.css'
     stylusBuildFolder + 'main.css'
     #lessBuildFolder + 'less.css'
 ]
 
 # coffee settings
 coffeeFolder = 'coffee/'
-coffeeMask = '**/**/*.coffee'
 
 # react settings
 reactFolder = 'react/'
-reactMask = '**/**/*.jsx'
 reactBuildFolder = jsBuildFolder + reactFolder
 reactCoreFolder = 'bower_components/react/'
 reactCoreFiles = [
@@ -73,27 +53,27 @@ reactCoreFiles = [
 
 # js settings
 jsFolder = 'js/'
-jsOutput = 'application.js'
-jsOutputMin = 'application.min.js'
+jsOutput = jsBuildFolder + 'application.js'
+jsOutputMin = jsBuildFolder + 'application.min.js'
 jsFiles = reactCoreFiles.map (f) -> reactCoreFolder + f
 .concat [
-    #diCoreFolder + 'js/functions.js'
-    bowerFolder + 'jsep/src/jsep.js'
-    bowerFolder + 'dreampilot/dist/dp.js' #.min
+    Helper.getCoreFolder() + 'js/functions.js'
+    #bowerFolder + 'jsep/src/jsep.js'
+    #bowerFolder + 'dreampilot/dist/dp.js' #.min
     jsFolder + '**/**/*.js' # pure js
     jsBuildFolder + '**/*.js' # compiled coffee
-    '!' + jsBuildFolder + jsOutput
-    '!' + jsBuildFolder + jsOutputMin
+    '!' + jsOutput
+    '!' + jsOutputMin
 ]
 
 assetFiles = [
-    stylusBuildFolder + 'styles.min.css'
-    jsBuildFolder + jsOutput
-    jsBuildFolder + jsOutputMin
+    cssOutputMin
+    jsOutput
+    jsOutputMin
 ]
 assetFilesForWatch = [
-    stylusBuildFolder + 'styles.min.css'
-    jsBuildFolder + jsOutputMin
+    cssOutputMin
+    jsOutputMin
 ]
 assetImageFiles = [
     imagesFolder + '**/*.*'
@@ -109,23 +89,23 @@ assetsTargetFolder = '../htdocs/assets/'
 # watch settings
 watchSettings =
     'stylus-sprite':
-        mask: spritesMask
+        mask: Helper.masks.sprite
     'stylus':
-        mask: stylusFolder + stylusMask
+        mask: stylusFolder + Helper.masks.stylus
     #'less':
-    #    mask: lessFolder + lessMask
+    #    mask: lessFolder + Helper.masks.less
     'css-concat':
         mask: cssFiles
     'css-min':
         mask: cssOutput
     'coffee':
-        mask: coffeeFolder + coffeeMask
+        mask: coffeeFolder + Helper.masks.coffee
     #'react':
-    #    mask: reactFolder + reactMask
+    #    mask: reactFolder + Helper.masks.react
     'js-concat':
         mask: jsFiles
     'js-min':
-        mask: jsBuildFolder + jsOutput
+        mask: jsOutput
     'copy-assets':
         mask: [
             assetFilesForWatch
@@ -133,37 +113,6 @@ watchSettings =
             assetFontFiles
             assetVideoFiles
         ]
-
-# css minify
-gulp.task 'css-min', (done) ->
-    gulp.src Helper.fullPath cssOutput
-    .pipe csso()
-    .on 'error', console.log
-    .pipe rename suffix: '.min'
-    .pipe gulp.dest Helper.fullPath stylusBuildFolder
-    .on 'end', -> done()
-
-# copy bower files to public
-gulp.task 'bower-files', (done) ->
-    bower
-        interactive: true
-    .pipe gulp.dest vendorFolder
-    .on 'end', -> done()
-
-# js concat
-gulp.task 'js-concat', (done) ->
-    gulp.src jsFiles.map (f) -> Helper.fullPath f
-    .pipe concat jsOutput
-    .pipe gulp.dest Helper.fullPath jsBuildFolder
-    .on 'end', -> done()
-
-# js minify
-gulp.task 'js-min', (done) ->
-    gulp.src Helper.fullPath jsBuildFolder + jsOutput
-    .pipe uglify()
-    .pipe rename suffix: '.min'
-    .pipe gulp.dest Helper.fullPath jsBuildFolder
-    .on 'end', -> done()
 
 # killing old assets
 gulp.task 'del-old-assets', (done) ->
@@ -176,36 +125,24 @@ gulp.task 'del-old-assets', (done) ->
 
 # copy assets to htdocs
 gulp.task 'copy-assets', (done) ->
-    tasksTotal = 4
-    tasksDone = 0
-
-    gulp.src assetFiles, base: buildFolder
-    .on 'error', console.log
-    .pipe gulp.dest assetsTargetFolder
-    .on 'end', -> Helper.tryDone ++tasksDone, tasksTotal, done
-
-    gulp.src assetImageFiles, base: imagesFolder
-    .on 'error', console.log
-    .pipe gulp.dest assetsTargetFolder + imagesFolder
-    .on 'end', -> Helper.tryDone ++tasksDone, tasksTotal, done
-
-    gulp.src assetFontFiles, base: fontsFolder
-    .on 'error', console.log
-    .pipe gulp.dest assetsTargetFolder + fontsFolder
-    .on 'end', -> Helper.tryDone ++tasksDone, tasksTotal, done
-
-    gulp.src assetVideoFiles, base: videosFolder
-    .on 'error', console.log
-    .pipe gulp.dest assetsTargetFolder + videosFolder
-    .on 'end', -> Helper.tryDone ++tasksDone, tasksTotal, done
+    Helper
+    .addSimpleCopyTaskToGulp gulp, groupId: 'copy-assets', files: assetFiles, baseFolder: buildFolder, destFolder: assetsTargetFolder, done: done
+    .addSimpleCopyTaskToGulp gulp, groupId: 'copy-assets', files: assetImageFiles, baseFolder: imagesFolder, destFolder: assetsTargetFolder + imagesFolder, done: done
+    .addSimpleCopyTaskToGulp gulp, groupId: 'copy-assets', files: assetFontFiles, baseFolder: fontsFolder, destFolder: assetsTargetFolder + fontsFolder, done: done
+    .addSimpleCopyTaskToGulp gulp, groupId: 'copy-assets', files: assetVideoFiles, baseFolder: videosFolder, destFolder: assetsTargetFolder + videosFolder, done: done
 
 Helper
 .assignBasicTasksToGulp gulp
 #.assignLessTaskToGulp gulp, fn: lessFn, buildFolder: lessBuildFolder
-.assignPngSpritesTaskToGulp gulp, mask: spritesMask, imgName: spritesImageName, cssName: spritesFileName, cssFormat: 'stylus', imgFolder: spritesImageOutputFolder, cssFolder: spritesCssOutputFolder
+.assignPngSpritesTaskToGulp gulp, mask: Helper.masks.sprite, imgName: spritesImageName, cssName: spritesFileName, cssFormat: 'stylus', imgFolder: spritesImageOutputFolder, cssFolder: spritesCssOutputFolder
 .assignStylusTaskToGulp gulp, fn: stylusFn, buildFolder: stylusBuildFolder
 .assignCssConcatTaskToGulp gulp, files: cssFiles, output: cssOutput
-.assignCoffeeTaskToGulp gulp, folder: coffeeFolder, mask: coffeeMask, jsBuildFolder: jsBuildFolder, cleanBefore: false
+.assignCssMinTaskToGulp gulp, input: cssOutput, outputFolder: stylusBuildFolder
+.assignCoffeeTaskToGulp gulp, folder: coffeeFolder, mask: Helper.masks.coffee, jsBuildFolder: jsBuildFolder, cleanBefore: false
+.assignJavascriptConcatTaskToGulp gulp, files: jsFiles, output: jsOutput
+.assignJavascriptMinTaskToGulp gulp, input: jsOutput, outputFolder: jsBuildFolder
+.assignBowerFilesTaskToGulp gulp, outputFolder: vendorFolder
+.assignAdminStylusTaskToGulp gulp
 
 # build
 gulp.task 'build', gulp.series(
