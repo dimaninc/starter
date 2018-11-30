@@ -6,6 +6,7 @@ buildFolder = 'build/'
 jsBuildFolder = buildFolder + 'js/'
 vendorFolder = '../htdocs/assets/vendor/'
 bowerFolder = 'bower_components/'
+npmFolder = 'node_modules/'
 
 # stylus settings
 stylusFolder = 'stylus/'
