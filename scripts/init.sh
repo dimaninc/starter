@@ -9,10 +9,8 @@ COLOR_NO='\033[0m'
 
 if [[ "$OSTYPE" == "darwin"* ]]; then
 	isMacOs=true
-	sedParam=" ''"
 else
 	isMacOs=false
-	sedParam=''
 fi
 
 if [[ $path =~ ((.*)/([^/]+)/scripts/init.sh)$ ]]; then
@@ -88,15 +86,26 @@ rm -rf .git
 git init
 
 # replace macros
-echo 'Setting up Variables...'
-find . -type f ! -name 'init.sh' | xargs sed -i "${sedParam}"\
-	-e "s/$folderToken/$folder/g"\
-	-e "s/$domainToken/$domain/g"\
-	-e "s/$namespaceToken/$namespace/g"\
-	-e "s/$userToken/$user/g"\
-	-e "s/$creatorToken/$creator/g"\
-	-e "s/$dateToken/$date/g"\
-	-e "s/$timeToken/$time/g"
+echo 'Replacing up Variables...'
+if [[ isMacOs ]]; then
+    find . -type f ! -name 'init.sh' | xargs sed -i ''\
+        -e "s/$folderToken/$folder/g"\
+        -e "s/$domainToken/$domain/g"\
+        -e "s/$namespaceToken/$namespace/g"\
+        -e "s/$userToken/$user/g"\
+        -e "s/$creatorToken/$creator/g"\
+        -e "s/$dateToken/$date/g"\
+        -e "s/$timeToken/$time/g"
+else
+    find . -type f ! -name 'init.sh' | xargs sed -i\
+        -e "s/$folderToken/$folder/g"\
+        -e "s/$domainToken/$domain/g"\
+        -e "s/$namespaceToken/$namespace/g"\
+        -e "s/$userToken/$user/g"\
+        -e "s/$creatorToken/$creator/g"\
+        -e "s/$dateToken/$date/g"\
+        -e "s/$timeToken/$time/g"
+fi
 
 # rename Namespace folder
 echo "Renaming folder $root/src/$namespaceToken to $root/src/$namespace..."
