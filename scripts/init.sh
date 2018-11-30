@@ -67,6 +67,7 @@ namespace $namespaceToken\Data;
 class Environment extends \diCore\Data\Environment
 {
     const mainDomain = '[%DOMAIN%]';
+    const initiating = true;
 }
 EOF
 
@@ -86,7 +87,7 @@ rm -rf .git
 git init
 
 # replace macros
-echo 'Replacing up Variables...'
+echo 'Replacing variables...'
 if [[ isMacOs ]]; then
     find . -type f ! -name 'init.sh' | xargs sed -i ''\
         -e "s/$folderToken/$folder/g"\
