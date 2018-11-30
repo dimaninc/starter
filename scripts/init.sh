@@ -89,7 +89,7 @@ git init
 
 # replace macros
 echo 'Setting up Variables...'
-find . -type f ! -name 'init.sh' | xargs sed -i $sedParam \
+find . -type f ! -name 'init.sh' | xargs sed -i "${sedParam}"\
 	-e "s/$folderToken/$folder/g"\
 	-e "s/$domainToken/$domain/g"\
 	-e "s/$namespaceToken/$namespace/g"\
