@@ -15,7 +15,6 @@ class Config extends \diCore\Data\Config
 	const apiQueryPrefix = '/api/';
 	const mainLanguage = 'ru';
 	const folderForAssets = 'assets/';
-	const initiating = true;
 
 	protected static $location = \diLib::LOCATION_BEYOND;
 }
