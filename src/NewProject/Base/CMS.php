@@ -69,11 +69,6 @@ class CMS extends \diCore\Base\CMS
 		return false;
 	}
 
-	public static function ignoreCaches()
-	{
-		return static::debugMode() || in_array(static::getEnvironment(), [static::ENV_DEV, static::ENV_STAGE]);
-	}
-
 	/**
 	 * @return CMS
 	 */

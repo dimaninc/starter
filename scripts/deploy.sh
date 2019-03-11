@@ -24,13 +24,13 @@ then
     git stash
     git pull
 
-    composer selfupdate
+    #composer selfupdate
     composer install
 
     sh vendor/dimaninc/di_core/scripts/copy_core_static.sh
 
     cd assets
-    npm install
+    npm ci
     gulp build
 
     echo "Rebuilding caches..."

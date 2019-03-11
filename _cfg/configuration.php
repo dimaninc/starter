@@ -1,5 +1,5 @@
 <?php
-$cfg = new \diConfiguration();
+$cfg = new \diCore\Data\Configuration();
 $cfg->setTabsAr([
 	'general' => 'General',
 	'pics' => 'Pics',
