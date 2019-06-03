@@ -36,8 +36,9 @@ spritesFileName = 'sprite.styl'
 
 # css settings
 cssFolder = 'css/'
-cssOutput = stylusBuildFolder + 'styles.css'
-cssOutputMin = stylusBuildFolder + 'styles.min.css'
+cssOutputFolder = '../htdocs/assets/styles/'
+cssOutput = cssOutputFolder + 'styles.css'
+cssOutputMin = cssOutputFolder + 'styles.min.css'
 cssFiles = [
     cssFolder + 'jquery/*.css'
     #Helper.getCoreFolder() + 'css/dipopups.css'
@@ -56,7 +57,7 @@ es6BuildFolder = jsBuildFolder + es6Folder
 # react settings
 reactFolder = 'react/'
 reactBuildFolder = jsBuildFolder + reactFolder
-reactCoreFolder = 'bower_components/react/'
+reactCoreFolder = npmFolder + 'react/'
 reactCoreFiles = [
     #'react.min.js'
     #'react-dom.min.js'
@@ -64,8 +65,9 @@ reactCoreFiles = [
 
 # js settings
 jsFolder = 'js/'
-jsOutput = jsBuildFolder + 'application.js'
-jsOutputMin = jsBuildFolder + 'application.min.js'
+jsOutputFolder = '../htdocs/assets/js/'
+jsOutput = jsOutputFolder + 'application.js'
+jsOutputMin = jsOutputFolder + 'application.min.js'
 jsFiles = reactCoreFiles.map (f) -> reactCoreFolder + f
 .concat [
     Helper.getCoreFolder() + 'js/functions.js'
@@ -73,8 +75,6 @@ jsFiles = reactCoreFiles.map (f) -> reactCoreFolder + f
     #bowerFolder + 'dreampilot/dist/dp.js' #.min
     jsFolder + '**/**/*.js' # pure js
     jsBuildFolder + '**/*.js' # compiled coffee
-    '!' + jsOutput
-    '!' + jsOutputMin
 ]
 
 assetFiles = [
@@ -86,16 +86,6 @@ assetFilesForWatch = [
     cssOutputMin
     jsOutputMin
 ]
-assetImageFiles = [
-    imagesFolder + '**/*.*'
-]
-assetFontFiles = [
-    fontsFolder + '**/*.*'
-]
-assetVideoFiles = [
-    videosFolder + '**/*.*'
-]
-assetsTargetFolder = '../htdocs/assets/'
 
 # watch settings
 watchSettings =
@@ -121,36 +111,12 @@ watchSettings =
         mask: jsFiles
     'js-min':
         mask: jsOutput
-    'copy-assets':
-        mask: [
-            assetFilesForWatch...
-            assetImageFiles...
-            assetFontFiles...
-            assetVideoFiles...
-        ]
-
-# killing old assets
-gulp.task 'del-old-assets', (done) ->
-    excludes = [
-        #assetsTargetFolder + '_core'
-    ]
-    console.log 'Removing old assets excluding', excludes if excludes.length
-    Helper.deleteFolderRecursive assetsTargetFolder + (sf for sf in [imagesFolder, fontsFolder, videosFolder]), excludes
-    done()
-
-# copy assets to htdocs
-gulp.task 'copy-assets', (done) ->
-    Helper
-    .addSimpleCopyTaskToGulp gulp, groupId: 'copy-assets', files: assetFiles, baseFolder: buildFolder, destFolder: assetsTargetFolder, done: done
-    .addSimpleCopyTaskToGulp gulp, groupId: 'copy-assets', files: assetImageFiles, baseFolder: imagesFolder, destFolder: assetsTargetFolder + imagesFolder, done: done
-    .addSimpleCopyTaskToGulp gulp, groupId: 'copy-assets', files: assetFontFiles, baseFolder: fontsFolder, destFolder: assetsTargetFolder + fontsFolder, done: done
-    .addSimpleCopyTaskToGulp gulp, groupId: 'copy-assets', files: assetVideoFiles, baseFolder: videosFolder, destFolder: assetsTargetFolder + videosFolder, done: done
 
 Helper
 .assignBasicTasksToGulp gulp
 #.assignLessTaskToGulp gulp, fn: lessFn, buildFolder: lessBuildFolder
 #.assignSassTaskToGulp gulp, fn: sassFn, buildFolder: sassBuildFolder
-.assignPngSpritesTaskToGulp gulp, mask: Helper.masks.sprite, imgName: spritesImageName, cssName: spritesFileName, cssFormat: 'stylus', imgFolder: spritesImageOutputFolder, cssFolder: spritesCssOutputFolder
+#.assignPngSpritesTaskToGulp gulp, mask: Helper.masks.sprite, imgName: spritesImageName, cssName: spritesFileName, cssFormat: 'stylus', imgFolder: spritesImageOutputFolder, cssFolder: spritesCssOutputFolder
 .assignStylusTaskToGulp gulp, fn: stylusFn, buildFolder: stylusBuildFolder
 .assignCssConcatTaskToGulp gulp, files: cssFiles, output: cssOutput
 .assignCssMinTaskToGulp gulp, input: cssOutput, outputFolder: stylusBuildFolder
@@ -164,7 +130,7 @@ Helper
 # build
 gulp.task 'build', gulp.series(
     'bower-files'
-    'stylus-sprite'
+    #'stylus-sprite'
     'stylus'
     #'less'
     #'sass'
@@ -175,9 +141,7 @@ gulp.task 'build', gulp.series(
     'js-concat'
     'js-min'
     'version'
-    'del-old-assets'
     'copy-core-assets'
-    'copy-assets'
 )
 
 # monitoring
@@ -187,7 +151,7 @@ gulp.task 'watch', (done) ->
             gulp.watch mask, gulp.series(process)
             .on 'change', (path, stats) ->
                 console.log '[' + process + '] changed file ' + path + ''
-                gulp.series 'version', 'copy-assets' if process in ['css-min', 'js-min']
+                gulp.series 'version' if process in ['css-min', 'js-min']
             true
 
     done()
