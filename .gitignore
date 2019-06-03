@@ -6,9 +6,10 @@
 /log
 /htdocs/uploads
 !/htdocs/uploads/.htaccess
-/htdocs/assets/*
-!/htdocs/assets/.htaccess
-!/htdocs/assets/favicon
+/htdocs/assets/images/_core/
+/htdocs/assets/js/
+/htdocs/assets/styles/
+/htdocs/vendor/
 /assets/node_modules
 /assets/bower_components
 /assets/build
