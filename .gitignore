@@ -6,6 +6,8 @@
 /log
 /htdocs/uploads
 !/htdocs/uploads/.htaccess
+/htdocs/assets/fonts/skin/
+/htdocs/assets/fonts/web/
 /htdocs/assets/images/_core/
 /htdocs/assets/js/
 /htdocs/assets/styles/
