@@ -33,7 +33,7 @@ if (\diRequest::isCli())
 			break;
 
 		case 'dev':
-			$_SERVER['DOCUMENT_ROOT'] = 'D:/OpenServer/domains/[%FOLDER%]/htdocs';
+			$_SERVER['DOCUMENT_ROOT'] = '/Users/dimaninc/www/[%FOLDER%]/htdocs';
 			$_SERVER['HTTP_HOST'] = '[%FOLDER%]';
 			$_SERVER['SERVER_PORT'] = 80;
 			break;

@@ -21,6 +21,7 @@ lock_dir="/var/lock/.deploy-[%FOLDER%]-$env.lock"
 if mkdir $lock_dir
 then
     cd $project_root
+    #sudo -u www-data:www-data
     git stash
     git pull
 
