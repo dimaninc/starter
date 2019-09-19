@@ -16,5 +16,5 @@ class Config extends \diCore\Data\Config
 	const mainLanguage = 'ru';
 	const folderForAssets = 'assets/';
 
-	protected static $location = \diLib::LOCATION_BEYOND;
+	protected static $location = \diLib::LOCATION_VENDOR_BEYOND;
 }
