@@ -11,10 +11,10 @@ diCMS project starter
    
 ## Fonts and Images folder:
  - `htdocs/assets/fonts/dist` 
- - `htdocs/assets/fonts/dist`
+ - `htdocs/assets/images/dist`
 
 ## Localhost Start Project
-link: `https://github.com/dimaninc/di_core/blob/master/man/init.md`
+link: https://github.com/testpilotco/di_core/blob/master/man/init.md
 
 1. Let's say, our project is called project_name
    git clone `git@github.com:organization/project_name.git`
