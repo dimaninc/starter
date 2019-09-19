@@ -14,10 +14,10 @@ diCMS project starter
  - `htdocs/assets/images/dist`
 
 ## Localhost Start Project
-link: https://github.com/testpilotco/di_core/blob/master/man/init.md
+link: https://github.com/dimaninc/di_core/blob/master/man/init.md
 
 1. Let's say, our project is called project_name
-   git clone `git@github.com:organization/project_name.git`
+   git clone `git@github.com:testpilotco/project_name.git`
 2. The root directory should point to `project_name/htdocs`
 3. Console command:
    `composer install`
