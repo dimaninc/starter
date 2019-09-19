@@ -23,6 +23,3 @@
 /_cfg/lib/diStaticBuild.php
 /src/NewProject/Data/Environment.php
 /htdocs/php.php
-composer.lock
-/assets/package-lock.json
-
