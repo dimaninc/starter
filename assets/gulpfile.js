@@ -11,7 +11,7 @@ const config = {
   assetsDir: '../assets',
   npmDir: 'node_modules',
   prodDir: '../htdocs/assets/',
-  isDevelopment: !plugins.util.env.production
+  isDevelopment: !plugins.util.env.production,
 };
 
 gulp.task('node-scripts', () => {
@@ -19,7 +19,7 @@ gulp.task('node-scripts', () => {
     .src(
       [
         config.npmDir + '/jquery/dist/jquery.min.js',
-        config.npmDir + '/swiper/js/swiper.min.js'
+        config.npmDir + '/swiper/js/swiper.min.js',
       ],
       { since: gulp.lastRun('node-scripts') }
     )
@@ -41,7 +41,7 @@ gulp.task('es6', () => {
 gulp.task('node-styles', () => {
   return gulp
     .src([config.npmDir + '/swiper/css/swiper.min.css'], {
-      since: gulp.lastRun('node-scripts')
+      since: gulp.lastRun('node-scripts'),
     })
     .pipe(plugins.concat('plugin.css'))
     .pipe(plugins.postcss([require('cssnano')]))
@@ -56,7 +56,7 @@ gulp.task('postcss', () => {
       plugins.stylelint({
         failAfterError: false,
         debug: true,
-        reporters: [{ formatter: 'verbose', console: true }]
+        reporters: [{ formatter: 'verbose', console: true, }]
       })
     )
     .pipe(plugins.sass().on('error', plugins.sass.logError))
@@ -64,7 +64,7 @@ gulp.task('postcss', () => {
       plugins.postcss([
         require('precss'),
         require('postcss-cssnext'),
-        require('cssnano')
+        require('cssnano'),
       ])
     )
     .pipe(
@@ -72,7 +72,7 @@ gulp.task('postcss', () => {
         '../../../images/',
         '../images/',
         '../../../fonts/',
-        '../fonts/'
+        '../fonts/',
       ])
     )
     .pipe(plugins.rename({ suffix: '.min' }))
@@ -88,7 +88,7 @@ gulp.task(
       'node-scripts',
       'postcss',
       'version',
-      'copy-core-assets'
+      'copy-core-assets',
     )
   )
 );
@@ -96,11 +96,11 @@ gulp.task(
 gulp.task('watch', () => {
   gulp.watch(
     config.assetsDir + '/src/scss/**/*.scss',
-    gulp.series(gulp.parallel('postcss'))
+    gulp.series(gulp.parallel('postcss')),
   );
   gulp.watch(
     config.assetsDir + '/src/js/*.js',
-    gulp.series(gulp.parallel('es6'))
+    gulp.series(gulp.parallel('es6')),
   );
 });
 
