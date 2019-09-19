@@ -1,7 +1,7 @@
 {
-  "name": "clean-gulp-init",
+  "name": "[%DOMAIN%]",
   "version": "1.0.0",
-  "description": "clean gulp for all entrine projects",
+  "description": "[%DOMAIN%]",
   "main": "index.html",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -13,7 +13,7 @@
     "css",
     "scss"
   ],
-  "author": "Alex Korsak",
+  "author": "Entrine",
   "license": "ISC",
   "devDependencies": {
     "babel-core": "^6.26.3",

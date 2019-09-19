@@ -1,1 +1,1 @@
-Folder for images web-site
+images for web-site

@@ -2,17 +2,16 @@
 diCMS project starter
 
 ## Usage:
-`git clone https://github.com/dimaninc/starter.git Folder && sh Folder/scripts/init.sh`
+`git clone https://github.com/testpilotco/starter.git Folder && sh Folder/scripts/init.sh`
 
 ## Warning Favicon and fonts
-1. Create and convert here - `https://realfavicongenerator.net`
-2. Convert font on all formats here - `https://onlinefontconverter.com/`
+1. Create and convert here - https://realfavicongenerator.net
+2. Convert font on all formats here - https://onlinefontconverter.com/
    format needed - (`ttf, woff, woff2, svg, eot, font-face`)
    
 ## Fonts and Images folder:
- `- htdocs/assets/fonts/dist`
- 
- `- htdocs/assets/fonts/dist`
+ - `htdocs/assets/fonts/dist` 
+ - `htdocs/assets/fonts/dist`
 
 ## Localhost Start Project
 link: `https://github.com/dimaninc/di_core/blob/master/man/init.md`

@@ -1,1 +1,1 @@
-Folder for fonts web-site
+fonts of web-site
