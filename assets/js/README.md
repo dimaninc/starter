@@ -1,1 +1,0 @@
-Legacy JS assets (new assets should be written on Coffeescript only)
