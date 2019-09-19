@@ -1,0 +1,8 @@
+//@function container-size($key) {
+//  @if map-has-key($container-size, $key) {
+//    @return map-get($container-size, $key);
+//  }
+//
+//  @warn "Unknown `#{$key}` in $container-size.";
+//  @return null;
+//}
