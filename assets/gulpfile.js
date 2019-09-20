@@ -24,7 +24,8 @@ gulp.task('node-scripts', () => {
       { since: gulp.lastRun('node-scripts') }
     )
     .pipe(plugins.concat('plugin.js'))
-    .pipe(plugins.if(!config.isDevelopment, plugins.uglify()))
+    .pipe(gulp.dest(config.prodDir + '/js'))
+    .pipe(plugins.uglify())
     .pipe(plugins.rename({ suffix: '.min' }))
     .pipe(gulp.dest(config.prodDir + '/js'));
 });
@@ -33,6 +34,7 @@ gulp.task('es6', () => {
   return gulp
     .src(config.assetsDir + '/src/js/*.js')
     .pipe(plugins.babel())
+    .pipe(gulp.dest(config.prodDir + '/js'))
     .pipe(plugins.uglify())
     .pipe(plugins.rename({ suffix: '.min' }))
     .pipe(gulp.dest(config.prodDir + '/js'));
