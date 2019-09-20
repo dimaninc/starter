@@ -12,15 +12,14 @@
 /htdocs/assets/js/
 /htdocs/assets/styles/
 /htdocs/vendor/
+/htdocs/assets/vendor/
 /assets/node_modules
-/assets/bower_components
-/assets/build
 /db/dump/*
 !/db/dump/tables
 !/db/dump/initial
 /htdocs/.well-known
 **/.DS_Store
-/assets/css/fonts/fonts.css
+/assets/css/fonts/
 /_cfg/lib/diStaticBuild.php
 /src/NewProject/Data/Environment.php
 /htdocs/php.php
