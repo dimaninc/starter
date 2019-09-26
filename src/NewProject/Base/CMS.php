@@ -61,7 +61,7 @@ class CMS extends \diCore\Base\CMS
 
 	protected function noIndexNeeded()
 	{
-		return true;
+        return self::getEnvironment() != self::ENV_PROD;
 	}
 
 	protected function shareBlockNeeded()
