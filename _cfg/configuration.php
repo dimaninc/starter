@@ -14,6 +14,13 @@ $cfg->setTabsAr([
 		],
 	],
 
+    'open_graph_default_pic' => [
+        'title' => 'Open graph default pic',
+        'type' => 'pic',
+        'value' => '',
+        'tab' => 'pics',
+    ],
+
 	'admin_per_page[admins]' => [
 		'title' => 'Admins per page (in Admin)',
 		'type' => 'int',
