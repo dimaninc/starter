@@ -1,42 +1,70 @@
 <?php
 $cfg = new \diCore\Data\Configuration();
 $cfg->setTabsAr([
-	'general' => 'General',
-	'pics' => 'Pics',
-	'counts' => 'Counts',
+	'general' => 'Основное',
+	'pics' => 'Картинки',
+	'counts' => 'Отображение',
 ])->setInitialData([
 	'auto_save_timeout' => [
-		'title' => 'Auto-save timeout, sec',
+		'title' => 'Период автосохранения, сек',
 		'type' => 'int',
 		'value' => 0,
 		'notes' => [
-			'Auto-save works in every Admin form. If 0 then auto-save feature is off',
+			'Автосохранение работает в каждой форме Админки. Если 0, то автосохранение отключено',
 		],
 	],
 
     'open_graph_default_pic' => [
-        'title' => 'Open graph default pic',
+        'title' => 'Картинка Open graph по умолчанию',
         'type' => 'pic',
         'value' => '',
         'tab' => 'pics',
     ],
 
+    'sample_width' => [
+        'title' => 'Ширина изображений',
+        'type' => 'int',
+        'value' => 1920,
+        'tab' => 'pics',
+    ],
+
+    'sample_height' => [
+        'title' => 'Высота изображений',
+        'type' => 'int',
+        'value' => 1080,
+        'tab' => 'pics',
+    ],
+
+    'sample_tn_width' => [
+        'title' => 'Ширина превью изображений',
+        'type' => 'int',
+        'value' => 400,
+        'tab' => 'pics',
+    ],
+
+    'sample_tn_height' => [
+        'title' => 'Высота превью изображений',
+        'type' => 'int',
+        'value' => 200,
+        'tab' => 'pics',
+    ],
+
 	'admin_per_page[admins]' => [
-		'title' => 'Admins per page (in Admin)',
+		'title' => 'Админов на странице (в админке)',
 		'type' => 'int',
 		'value' => 30,
 		'tab' => 'counts',
 	],
 
 	'admin_per_page[mail_queue]' => [
-		'title' => 'Mail queue records per page (in Admin)',
+		'title' => 'Писем в очереди на странице (в админке)',
 		'type' => 'int',
 		'value' => 30,
 		'tab' => 'counts',
 	],
 
 	'sender_email' => [
-		'title' => 'E-mail for outgoing mail',
+		'title' => 'E-mail для исходящих писем',
 		'type' => 'string',
 		'value' => 'noreply@' . \diCore\Data\Config::getMainDomain(),
 		'tab' => 'general',
