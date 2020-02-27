@@ -15,6 +15,7 @@
 /assets/node_modules
 /assets/bower_components
 /assets/build
+/db/files/
 /db/dump/*
 !/db/dump/tables
 !/db/dump/initial
