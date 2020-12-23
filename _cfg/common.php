@@ -17,12 +17,7 @@ date_default_timezone_set('Etc/GMT-3');
 switch (CMS::getEnvironment())
 {
 	case CMS::ENV_DEV:
-		Connection::open([
-			'host' => 'localhost',
-			'login' => 'root',
-			'password' => '',
-			'database' => '[%FOLDER%]',
-		]);
+        Connection::open(Connection::localMysqlConnData('[%FOLDER%]'));
 		break;
 
 	case CMS::ENV_STAGE:
