@@ -5,7 +5,6 @@ Helper = require('../vendor/dimaninc/di_core/scripts/static-builder/inc/gulp.hel
 buildFolder = 'build/'
 jsBuildFolder = buildFolder + 'js/'
 vendorFolder = '../htdocs/assets/vendor/'
-bowerFolder = 'bower_components/'
 npmFolder = 'node_modules/'
 
 # stylus settings
@@ -71,8 +70,6 @@ jsOutputMin = jsOutputFolder + 'application.min.js'
 jsFiles = reactCoreFiles.map (f) -> reactCoreFolder + f
 .concat [
     Helper.getCoreFolder() + 'js/functions.js'
-    #bowerFolder + 'jsep/src/jsep.js'
-    #bowerFolder + 'dreampilot/dist/dp.js' #.min
     jsFolder + '**/**/*.js' # pure js
     jsBuildFolder + '**/*.js' # compiled coffee
 ]
@@ -124,12 +121,10 @@ Helper
 #.assignEs6TaskToGulp gulp, folder: es6Folder, mask: Helper.masks.js, jsBuildFolder: jsBuildFolder
 .assignJavascriptConcatTaskToGulp gulp, files: jsFiles, output: jsOutput
 .assignJavascriptMinTaskToGulp gulp, input: jsOutput, outputFolder: jsBuildFolder
-.assignBowerFilesTaskToGulp gulp, outputFolder: vendorFolder
 .assignAdminStylusTaskToGulp gulp
 
 # build
 gulp.task 'build', gulp.series(
-    'bower-files'
     #'stylus-sprite'
     'stylus'
     #'less'

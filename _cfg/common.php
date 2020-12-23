@@ -2,6 +2,9 @@
 // cfg.common
 // (q) by dimaninc
 
+use diCore\Base\CMS;
+use diCore\Database\Connection;
+
 require \diPaths::fileSystem() . '/../vendor/autoload.php';
 
 date_default_timezone_set('Etc/GMT-3');
@@ -11,10 +14,10 @@ date_default_timezone_set('Etc/GMT-3');
 ]);
 
 // -[ mysql stuff ]-----------------------------------------------------------------
-switch (\diCore\Base\CMS::getEnvironment())
+switch (CMS::getEnvironment())
 {
-	case \diCore\Base\CMS::ENV_DEV:
-		\diCore\Database\Connection::open([
+	case CMS::ENV_DEV:
+		Connection::open([
 			'host' => 'localhost',
 			'login' => 'root',
 			'password' => '',
@@ -22,8 +25,8 @@ switch (\diCore\Base\CMS::getEnvironment())
 		]);
 		break;
 
-	case \diCore\Base\CMS::ENV_STAGE:
-		\diCore\Database\Connection::open([
+	case CMS::ENV_STAGE:
+		Connection::open([
 			'host' => 'localhost',
 			'login' => 'root',
 			'password' => '',
@@ -32,7 +35,7 @@ switch (\diCore\Base\CMS::getEnvironment())
 		break;
 
 	default:
-		\diCore\Database\Connection::open([
+		Connection::open([
 			'host' => 'localhost',
 			'login' => 'root',
 			'password' => '',
@@ -41,7 +44,7 @@ switch (\diCore\Base\CMS::getEnvironment())
 		break;
 }
 
-$db = \diCore\Database\Connection::get()->getDb();
+$db = Connection::get()->getDb();
 //$db->enableDebug();
 
 // -[ filesystem stuff ]------------------------------------------------------------
