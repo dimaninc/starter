@@ -88,7 +88,7 @@ git init
 
 # replace macros
 echo 'Replacing variables...'
-if [[ isMacOs ]]; then
+if [[ $isMacOs ]]; then
     find . -type f ! -name 'init.sh' | xargs sed -i ''\
         -e "s/$folderToken/$folder/g"\
         -e "s/$domainToken/$domain/g"\
@@ -115,6 +115,7 @@ mv "$root/src/$namespaceToken" "$root/src/$namespace"
 # composer install
 echo "Installing composer dependencies..."
 composer install
+composer require phpmailer/phpmailer
 
 # core init
 echo "Creating work folders..."

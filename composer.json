@@ -1,9 +1,8 @@
 {
-    "name": "[%DOMAIN%]",
+    "name": "NewProject",
     "type": "project",
     "require": {
-        "dimaninc/di_core": "dev-master",
-        "phpmailer/phpmailer": "^6.0"
+        "dimaninc/di_core": "dev-master"
     },
     "authors": [
         {
