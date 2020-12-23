@@ -1,5 +1,5 @@
 {
-    "name": "NewProject",
+    "name": "[%USER%]/NewProjectLoCase",
     "type": "project",
     "require": {
         "dimaninc/di_core": "dev-master"

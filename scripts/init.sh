@@ -34,6 +34,7 @@ done
 while [ -z ${namespace} ]; do
      read -p 'Namespace: ' namespace
 done
+namespaceLoCase="$(tr "[A-Z]" "[a-z]" <<< "$namespace")"
 read -p "User [${defaultUser}]: " user
 user=${user:-$defaultUser}
 
@@ -45,6 +46,7 @@ time=$(date +"%H:%M:%S")
 folderToken='\[%FOLDER%\]'
 domainToken='\[%DOMAIN%\]'
 namespaceToken='NewProject'
+namespaceTokenLoCase='NewProjectLoCase'
 userToken='\[%USER%\]'
 creatorToken='\[%CREATOR%\]'
 dateToken='\[%DATE%\]'
@@ -92,6 +94,7 @@ if [[ $isMacOs ]]; then
     find . -type f ! -name 'init.sh' | xargs sed -i ''\
         -e "s/$folderToken/$folder/g"\
         -e "s/$domainToken/$domain/g"\
+        -e "s/$namespaceTokenLoCase/$namespaceLoCase/g"\
         -e "s/$namespaceToken/$namespace/g"\
         -e "s/$userToken/$user/g"\
         -e "s/$creatorToken/$creator/g"\
@@ -101,6 +104,7 @@ else
     find . -type f ! -name 'init.sh' | xargs sed -i\
         -e "s/$folderToken/$folder/g"\
         -e "s/$domainToken/$domain/g"\
+        -e "s/$namespaceTokenLoCase/$namespaceLoCase/g"\
         -e "s/$namespaceToken/$namespace/g"\
         -e "s/$userToken/$user/g"\
         -e "s/$creatorToken/$creator/g"\
