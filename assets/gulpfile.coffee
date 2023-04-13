@@ -74,12 +74,6 @@ jsFiles = [
     jsFolder + '**/**/*.js' # pure js
 ]
 
-assetFiles = [
-    cssOutputMin
-    jsOutput
-    jsOutputMin
-]
-
 # watch settings
 watchSettings =
     'stylus-sprite':
@@ -116,7 +110,7 @@ Helper
 .assignCoffeeTaskToGulp gulp, folder: coffeeFolder, mask: Helper.masks.coffee, jsBuildFolder: jsBuildFolder, cleanBefore: false
 .assignEs6TaskToGulp gulp, folder: es6Folder, mask: Helper.masks.js, jsBuildFolder: jsBuildFolder
 .assignJavascriptConcatTaskToGulp gulp, files: jsFiles, output: jsOutput
-.assignJavascriptMinTaskToGulp gulp, input: jsOutput, outputFolder: jsBuildFolder
+.assignJavascriptMinTaskToGulp gulp, input: jsOutput, outputFolder: jsOutputFolder
 .assignAdminStylusTaskToGulp gulp
 
 # build
