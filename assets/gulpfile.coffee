@@ -54,33 +54,29 @@ es6Folder = 'es6/'
 es6BuildFolder = jsBuildFolder + es6Folder
 
 # react settings
-reactFolder = 'react/'
-reactBuildFolder = jsBuildFolder + reactFolder
-reactCoreFolder = npmFolder + 'react/'
-reactCoreFiles = [
+#reactFolder = 'react/'
+#reactBuildFolder = jsBuildFolder + reactFolder
+#reactCoreFolder = npmFolder + 'react/'
+#reactCoreFiles = [
     #'react.min.js'
     #'react-dom.min.js'
-]
+#]
 
 # js settings
 jsFolder = 'js/'
 jsOutputFolder = '../htdocs/assets/js/'
 jsOutput = jsOutputFolder + 'application.js'
 jsOutputMin = jsOutputFolder + 'application.min.js'
-jsFiles = reactCoreFiles.map (f) -> reactCoreFolder + f
-.concat [
+#reactCoreFiles.map((f) -> reactCoreFolder + f).concat
+jsFiles = [
     Helper.getCoreFolder() + 'js/functions.js'
+    jsBuildFolder + '**/*.js' # compiled es6/coffee
     jsFolder + '**/**/*.js' # pure js
-    jsBuildFolder + '**/*.js' # compiled coffee
 ]
 
 assetFiles = [
     cssOutputMin
     jsOutput
-    jsOutputMin
-]
-assetFilesForWatch = [
-    cssOutputMin
     jsOutputMin
 ]
 
@@ -102,8 +98,8 @@ watchSettings =
         mask: coffeeFolder + Helper.masks.coffee
     #'react':
     #    mask: reactFolder + Helper.masks.react
-    #'es6':
-    #    mask: es6Folder + Helper.masks.js
+    'es6':
+        mask: es6Folder + Helper.masks.js
     'js-concat':
         mask: jsFiles
     'js-min':
@@ -118,7 +114,7 @@ Helper
 .assignCssConcatTaskToGulp gulp, files: cssFiles, output: cssOutput
 .assignCssMinTaskToGulp gulp, input: cssOutput, outputFolder: stylusBuildFolder
 .assignCoffeeTaskToGulp gulp, folder: coffeeFolder, mask: Helper.masks.coffee, jsBuildFolder: jsBuildFolder, cleanBefore: false
-#.assignEs6TaskToGulp gulp, folder: es6Folder, mask: Helper.masks.js, jsBuildFolder: jsBuildFolder
+.assignEs6TaskToGulp gulp, folder: es6Folder, mask: Helper.masks.js, jsBuildFolder: jsBuildFolder
 .assignJavascriptConcatTaskToGulp gulp, files: jsFiles, output: jsOutput
 .assignJavascriptMinTaskToGulp gulp, input: jsOutput, outputFolder: jsBuildFolder
 .assignAdminStylusTaskToGulp gulp
@@ -132,7 +128,7 @@ gulp.task 'build', gulp.series(
     'css-concat'
     'css-min'
     'coffee'
-    #'es6'
+    'es6'
     'js-concat'
     'js-min'
     'version'
