@@ -106,7 +106,7 @@ Helper
 #.assignPngSpritesTaskToGulp gulp, mask: Helper.masks.sprite, imgName: spritesImageName, cssName: spritesFileName, cssFormat: 'stylus', imgFolder: spritesImageOutputFolder, cssFolder: spritesCssOutputFolder
 .assignStylusTaskToGulp gulp, fn: stylusFn, buildFolder: stylusBuildFolder
 .assignCssConcatTaskToGulp gulp, files: cssFiles, output: cssOutput
-.assignCssMinTaskToGulp gulp, input: cssOutput, outputFolder: stylusBuildFolder
+.assignCssMinTaskToGulp gulp, input: cssOutput, outputFolder: cssOutputFolder
 .assignCoffeeTaskToGulp gulp, folder: coffeeFolder, mask: Helper.masks.coffee, jsBuildFolder: jsBuildFolder, cleanBefore: false
 .assignEs6TaskToGulp gulp, folder: es6Folder, mask: Helper.masks.js, jsBuildFolder: jsBuildFolder
 .assignJavascriptConcatTaskToGulp gulp, files: jsFiles, output: jsOutput
