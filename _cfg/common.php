@@ -14,8 +14,7 @@ date_default_timezone_set('Etc/GMT-3');
 ]);
 
 // -[ mysql stuff ]-----------------------------------------------------------------
-switch (CMS::getEnvironment())
-{
+switch (CMS::getEnvironment()) {
 	case CMS::ENV_DEV:
         Connection::open(Connection::localMysqlConnData('[%FOLDER%]'));
 		break;

@@ -16,6 +16,7 @@
   "devDependencies": {
     "@babel/core": "^7.10.3",
     "@babel/preset-env": "^7.10.3",
+    "@prettier/plugin-php": "^0.19.4",
     "coffee-script": "^1.10.0",
     "gulp": "^4.0.0",
     "gulp-babel": "^8.0.0",
@@ -31,6 +32,7 @@
     "gulp.spritesmith": "^6.2.0",
     "mkdirp": "^0.5.1",
     "nib": "^1.1.2",
-    "prettier": "^2.8.7"
+    "prettier": "^2.8.7",
+    "stylus": "^0.59.0"
   }
 }

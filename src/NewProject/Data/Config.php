@@ -12,7 +12,6 @@ class Config extends \diCore\Data\Config
 {
 	const siteTitle = '';
 	const mainDomain = '[%DOMAIN%]';
-	const apiQueryPrefix = '/api/';
 	const mainLanguage = 'ru';
 	const folderForAssets = 'assets/';
 
