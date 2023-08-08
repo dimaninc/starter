@@ -1,6 +1,9 @@
 gulp = require 'gulp'
 Helper = require('../vendor/dimaninc/di_core/scripts/static-builder/inc/gulp.helper').setWorkFolder __dirname
 
+# true if web-site root is inside /htdocs folder
+isBeyond = true
+
 # base folder
 buildFolder = 'build/'
 jsBuildFolder = buildFolder + 'js/'
@@ -29,14 +32,14 @@ spritesFileName = 'sprite.styl'
 
 # css settings
 cssFolder = 'css/'
-cssOutputFolder = '../assets/styles/'
+cssOutputFolder = "../#{isBeyond ? 'htdocs/' : ''}assets/styles/"
 cssOutput = cssOutputFolder + 'styles.css'
 cssOutputMin = cssOutputFolder + 'styles.min.css'
 cssFiles = [
     cssFolder + 'jquery/*.css'
     #Helper.getCoreFolder() + 'css/dipopups.css'
     stylusBuildFolder + 'main.css'
-    lessBuildFolder + 'less.css'
+    #lessBuildFolder + 'less.css'
     #sassBuildFolder + 'sass.css'
 ]
 
@@ -49,7 +52,7 @@ es6BuildFolder = jsBuildFolder + es6Folder
 
 # js settings
 jsFolder = 'js/'
-jsOutputFolder = '../assets/js/'
+jsOutputFolder = "../#{isBeyond ? 'htdocs/' : ''}assets/js/"
 jsOutput = jsOutputFolder + 'application.js'
 jsFiles = [
     Helper.getCoreFolder() + 'js/functions.js'
