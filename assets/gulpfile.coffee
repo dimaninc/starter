@@ -3,6 +3,7 @@ Helper = require('../vendor/dimaninc/di_core/scripts/static-builder/inc/gulp.hel
 
 # true if web-site root is inside /htdocs folder
 isBeyond = true
+beyondPrefix = if isBeyond then 'htdocs/' else ''
 
 # base folder
 buildFolder = 'build/'
@@ -32,7 +33,7 @@ spritesFileName = 'sprite.styl'
 
 # css settings
 cssFolder = 'css/'
-cssOutputFolder = "../#{isBeyond ? 'htdocs/' : ''}assets/styles/"
+cssOutputFolder = "../#{beyondPrefix}assets/styles/"
 cssOutput = cssOutputFolder + 'styles.css'
 cssOutputMin = cssOutputFolder + 'styles.min.css'
 cssFiles = [
@@ -52,7 +53,7 @@ es6BuildFolder = jsBuildFolder + es6Folder
 
 # js settings
 jsFolder = 'js/'
-jsOutputFolder = "../#{isBeyond ? 'htdocs/' : ''}assets/js/"
+jsOutputFolder = "../#{beyondPrefix}assets/js/"
 jsOutput = jsOutputFolder + 'application.js'
 jsFiles = [
     Helper.getCoreFolder() + 'js/functions.js'
@@ -117,7 +118,7 @@ gulp.task 'build', gulp.series(
     'js-concat'
     'js-min'
     'version'
-    #'copy-core-assets'
+    'copy-core-assets'
 )
 
 # monitoring
