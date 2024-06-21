@@ -10,5 +10,9 @@
             "email": "dimaninc@gmail.com"
         }
     ],
+    "config": {
+        "preferred-install": "source",
+        "sort-packages": true
+    },
     "minimum-stability": "stable"
 }
