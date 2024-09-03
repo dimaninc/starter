@@ -1,3 +1,4 @@
+# deprecated
 gulp = require 'gulp'
 Helper = require('../vendor/dimaninc/di_core/scripts/static-builder/inc/gulp.helper').setWorkFolder __dirname
 
