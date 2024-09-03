@@ -1,0 +1,27 @@
+{
+  "compilerOptions": {
+    "target": "ES6",
+    "module": "ESNext",
+    "outDir": "./build/scripts/typescript",
+    "rootDir": "../",
+    "declaration": true,
+    "strict": true,
+    "sourceMap": true,
+    "esModuleInterop": true,
+    "moduleResolution": "node",
+    "skipLibCheck": true,
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./ts/*"],
+      "@dicore/*": ["../vendor/dimaninc/di_core/ts/*"]
+    }
+  },
+  "include": [
+    "ts/**/*.ts",
+    "ts/**/*.d.ts",
+    "node_modules/@types/**/*.d.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+}

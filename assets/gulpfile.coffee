@@ -48,20 +48,26 @@ cssFiles = [
 coffeeFolder = 'coffee/'
 
 # es6 settings
-es6Folder = 'es6/'
+es6Folder = 'es6/' # es6 source
 es6BuildFolder = jsBuildFolder + es6Folder
 
+# typescript settings
+typescriptFolder = 'ts/' # typescript source
+typescriptBuildFolder = jsBuildFolder + 'typescript/'
+
 # js settings
-jsFolder = 'js/'
+jsFolder = 'js/' # ecma5 source
 jsOutputFolder = "../#{beyondPrefix}assets/js/"
 jsOutput = jsOutputFolder + 'application.js'
 jsFiles = [
     Helper.getCoreFolder() + 'js/functions.js'
     # npmFolder + 'slick-carousel/slick/slick.js'
-    jsBuildFolder + '**/**/*.js' # compiled es6/coffee
+    coffeeBuildFolder + Helper.masks.js # compiled coffee
+    typescriptBuildFolder + Helper.masks.js # compiled typescript
+    es6BuildFolder + Helper.masks.js # compiled es6
+    jsFolder + '**/**/*.js' # ecma5
     '!' + jsBuildFolder + 'main.js'
     #'!' + jsBuildFolder + 'Tweaks.js'
-    #jsFolder + '**/**/*.js' # pure js
     jsBuildFolder + 'main.js'
     #jsBuildFolder + 'Tweaks.js'
 ]
@@ -86,6 +92,8 @@ watchSettings =
     #    mask: coffeeFolder + Helper.masks.coffee
     'es6':
         mask: pr + es6Folder + '**/*.js'
+    'typescript':
+        mask: typescriptFolder + Helper.masks.ts
     'js-concat':
         mask: jsFiles
     'js-min':
@@ -101,6 +109,7 @@ Helper
 .assignCssMinTaskToGulp gulp, input: cssOutput, outputFolder: cssOutputFolder
 #.assignCoffeeTaskToGulp gulp, folder: coffeeFolder, mask: Helper.masks.coffee, jsBuildFolder: jsBuildFolder, cleanBefore: false
 .assignEs6TaskToGulp gulp, folder: es6Folder, mask: Helper.masks.js, jsBuildFolder: jsBuildFolder
+.assignWebpackTypescriptTaskToGulp gulp, entryFiles: ['ts/index.ts'], buildFolder: typescriptBuildFolder
 .assignJavascriptConcatTaskToGulp gulp, files: jsFiles, output: jsOutput
 .assignJavascriptMinTaskToGulp gulp, input: jsOutput, outputFolder: jsOutputFolder
 .assignAdminStylusTaskToGulp gulp
@@ -115,6 +124,7 @@ gulp.task 'build', gulp.series(
     'css-min'
     #'coffee'
     'es6'
+    'typescript'
     'js-concat'
     'js-min'
     'version'
