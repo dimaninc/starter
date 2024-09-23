@@ -33,6 +33,7 @@
     "gulp-csso": "^1.0.1",
     "gulp-less": "^3.4.0",
     "gulp-rename": "^1.2.2",
+    "gulp-sass": "^5.0.0",
     "gulp-sourcemaps": "^3.0.0",
     "gulp-stylus": "^2.3.0",
     "gulp-typescript": "^6.0.0-alpha.1",

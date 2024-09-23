@@ -47,6 +47,7 @@ cssFiles = [
 
 # coffee settings
 coffeeFolder = 'coffee/'
+coffeeBuildFolder = jsBuildFolder + coffeeFolder
 
 # es6 settings
 es6Folder = 'es6/' # es6 source

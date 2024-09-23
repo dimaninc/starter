@@ -35,12 +35,14 @@ const cssOutputMin = cssOutputFolder + 'styles.min.css';
 const cssFiles = [cssFolder + 'jquery/*.css', stylusBuildFolder + 'main.css'];
 
 const coffeeFolder = 'coffee/';
+const coffeeBuildFolder = jsBuildFolder + coffeeFolder;
 
 const es6Folder = 'es6/';
 const es6BuildFolder = jsBuildFolder + es6Folder;
 
 const typescriptFolder = 'ts/';
 const typescriptBuildFolder = jsBuildFolder + 'typescript/';
+const typescriptEs5BuildFolder = jsBuildFolder + 'typescript-es5/';
 
 const jsFolder = 'js/';
 const jsOutputFolder = '../' + beyondPrefix + 'assets/js/';
@@ -48,7 +50,7 @@ const jsOutput = jsOutputFolder + 'application.js';
 const jsFiles = [
     Helper.getCoreFolder() + 'js/functions.js',
     coffeeBuildFolder + Helper.masks.js,
-    typescriptBuildFolder + Helper.masks.js,
+    typescriptEs5BuildFolder + Helper.masks.js,
     es6BuildFolder + Helper.masks.js,
     jsFolder + '**/**/*.js',
     '!' + jsBuildFolder + 'main.js',
@@ -72,10 +74,13 @@ const watchSettings = {
         mask: cssOutput,
     },
     'es6': {
-        mask: pr + es6Folder + '**/*.js',
+        mask: `${pr}${es6Folder}**/*.js|${pr}${typescriptEs5BuildFolder}**/*.js`,
     },
     'typescript': {
         mask: typescriptFolder + Helper.masks.ts,
+    },
+    'typescript-es5': {
+        mask: `${pr}${typescriptBuildFolder}**/*.js`,
     },
     'js-concat': {
         mask: jsFiles,
@@ -109,11 +114,17 @@ Helper.assignBasicTasksToGulp(gulp)
     .assignEs6TaskToGulp(gulp, {
         folder: es6Folder,
         mask: Helper.masks.js,
-        jsBuildFolderr,
+        jsBuildFolder,
     })
     .assignWebpackTypescriptTaskToGulp(gulp, {
         entryFiles: ['ts/index.ts'],
         buildFolder: typescriptBuildFolder,
+    })
+    .assignEs6TaskToGulp(gulp, {
+        taskName: 'typescript-es5',
+        folder: typescriptBuildFolder,
+        mask: Helper.masks.js,
+        jsBuildFolder: typescriptEs5BuildFolder,
     })
     .assignJavascriptConcatTaskToGulp(gulp, {
         files: jsFiles,
@@ -133,6 +144,7 @@ gulp.task(
         'css-min',
         'es6',
         'typescript',
+        'typescript-es5',
         'js-concat',
         'js-min',
         'version',
