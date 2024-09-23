@@ -12,12 +12,12 @@ use diCore\Tool\Mail\Transport;
 
 class Sender extends \diCore\Tool\Mail\Sender
 {
-	const defaultFromName = '[%DOMAIN%]';
-	const defaultFromEmail = 'noreply@[%DOMAIN%]';
+    const defaultFromName = '[%DOMAIN%]';
+    const defaultFromEmail = 'noreply@[%DOMAIN%]';
 
-	const transport = Transport::SMTP;
+    const transport = Transport::SMTP;
 
-	protected static $accounts = [
-		'noreply@[%DOMAIN%]' => '***',
-	];
+    protected static $accounts = [
+        'noreply@[%DOMAIN%]' => '***',
+    ];
 }

@@ -10,7 +10,7 @@ namespace NewProject\Data\Content;
 
 class Types extends \diContentTypesBasic
 {
-	protected static $types = [
-		'home' => 'Заглавная',
-	];
+    protected static $types = [
+        'home' => 'Заглавная',
+    ];
 }

@@ -10,9 +10,8 @@ namespace NewProject\Module;
 
 class Home extends \diModule
 {
-	public function render()
-	{
-		$this->getTwig()
-			->renderPage('home/page');
-	}
+    public function render()
+    {
+        $this->getTwig()->renderPage('home/page');
+    }
 }

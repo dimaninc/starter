@@ -10,78 +10,70 @@ namespace NewProject\Base;
 
 class CMS extends \diCore\Base\CMS
 {
-	const MAIN_TEMPLATE_ENGINE = self::TEMPLATE_ENGINE_TWIG;
+    const MAIN_TEMPLATE_ENGINE = self::TEMPLATE_ENGINE_TWIG;
 
-	protected $authUsed = false;
+    protected $authUsed = false;
 
-	public static $devDomains = [
-		'[%FOLDER%]',
-	];
+    public static $devDomains = ['[%FOLDER%]'];
 
-	public static $stageDomains = [
-		'[%DOMAIN%]',
-	];
+    public static $stageDomains = ['[%DOMAIN%]'];
 
-	static public $possibleLanguages = [
-		'ru',
-	];
+    public static $possibleLanguages = ['ru'];
 
-	public static $defaultLanguage = 'ru';
+    public static $defaultLanguage = 'ru';
 
-	protected static $customSkipGetParams = [
-	];
+    protected static $customSkipGetParams = [];
 
-	public function go()
-	{
-		$this
-			->start()
-			->load_content_rec()
-			->assignHtmlHead()
-			->assign_ct_ar()
-			->printAuthStuff()
-			->printMainMenu()
-			->initBreadCrumbs()
-			->renderPage();
-	}
+    public function go()
+    {
+        $this->start()
+            ->load_content_rec()
+            ->assignHtmlHead()
+            ->assign_ct_ar()
+            ->printAuthStuff()
+            ->printMainMenu()
+            ->initBreadCrumbs()
+            ->renderPage();
+    }
 
-	protected function renderAfterError()
-	{
-		//$this
-		//	->printAuthStuff();
+    protected function renderAfterError()
+    {
+        //$this
+        //	->printAuthStuff();
 
-		return $this;
-	}
+        return $this;
+    }
 
-	protected function getNeededSwitches()
-	{
-		return extend(parent::getNeededSwitches(), [
-			'noindex' => $this->noIndexNeeded(),
-		]);
-	}
+    protected function getNeededSwitches()
+    {
+        return extend(parent::getNeededSwitches(), [
+            'noindex' => $this->noIndexNeeded(),
+        ]);
+    }
 
-	protected function noIndexNeeded()
-	{
+    protected function noIndexNeeded()
+    {
         return self::getEnvironment() != self::ENV_PROD;
-	}
+    }
 
-	protected function shareBlockNeeded()
-	{
-		return false;
-	}
+    protected function shareBlockNeeded()
+    {
+        return false;
+    }
 
-	/**
-	 * @return CMS
-	 */
-	protected function printAuthStuff()
-	{
-		/*
+    /**
+     * @return CMS
+     */
+    protected function printAuthStuff()
+    {
+        /*
 		if ($this->authUsed && diAuth::i()->authorized())
 		{
 			$this->printUserMenu();
 		}
 		*/
 
-		/*
+        /*
 		parent::printAuthStuff();
 
 		if ($this->authUsed)
@@ -90,15 +82,15 @@ class CMS extends \diCore\Base\CMS
 		}
 		*/
 
-		return $this;
-	}
+        return $this;
+    }
 
-	/**
-	 * @return CMS
-	 */
-	public function printMainMenu()
-	{
-		/*
+    /**
+     * @return CMS
+     */
+    public function printMainMenu()
+    {
+        /*
 		$this->getTwig()
 			->assign([
 				'top_menu' => array_filter($this->tables['content'], function(Model $m) {
@@ -110,6 +102,6 @@ class CMS extends \diCore\Base\CMS
 			]);
 		*/
 
-		return $this;
-	}
+        return $this;
+    }
 }

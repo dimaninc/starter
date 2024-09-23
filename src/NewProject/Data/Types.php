@@ -10,12 +10,9 @@ namespace NewProject\Data;
 
 class Types extends \diCore\Data\Types
 {
-	public static $tables = [
-	];
+    public static $tables = [];
 
-	public static $names = [
-	];
+    public static $names = [];
 
-	public static $titles = [
-	];
+    public static $titles = [];
 }
