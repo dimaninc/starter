@@ -8,10 +8,16 @@ root = true
 end_of_line = lf
 insert_final_newline = true
 
-# Matches JavaScript files
-[*.{js,jsx}]
+[*.{php,html,twig}]
 charset = utf-8
 indent_size = 4
+indent_style = space
+max_line_length = 120
+
+# Matches JavaScript files
+[*.{js,jsx,ts,tsx}]
+charset = utf-8
+indent_size = 2
 indent_style = space
 max_line_length = 120
 
