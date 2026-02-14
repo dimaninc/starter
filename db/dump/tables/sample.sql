@@ -10,10 +10,10 @@ CREATE TABLE IF NOT EXISTS sample(
   properties json,
   ip bigint,
   order_num int,
-  visible tinyint default '0',
+  visible tinyint default '1',
   top tinyint default '0',
-  created_at timestamp default CURRENT_TIMESTAMP,
-  updated_at timestamp default NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   primary key(id),
   index idx(name, email, company, visible, top, order_num)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
